@@ -1,5 +1,9 @@
-import {DateTime} from "ionic-angular";
-
 export class Meal{
-  constructor(datetime: DateTime, quantity: number){}
+  constructor() {
+    this.datetime = new Date().toISOString();
+  }
+
+  public datetime: string;
+
+  public quantity: number;
 }
