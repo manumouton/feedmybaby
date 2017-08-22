@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Meals
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button color="primary" (click)="addMeal()">
+        <ion-icon ios="add-circle" md="md-add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>Jules' meals</ion-list-header>
+      <ion-item-sliding *ngFor="let meal of mealsList | async">
+        <ion-item>
+          {{ meal.quantity }} ml - {{meal.datetime | date:'medium'}}
+        </ion-item>
+      <ion-item-options>
+        <button ion-button color="primary" icon-left (click)="editMeal(meal)">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" icon-left (click)="deleteMeal(meal)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

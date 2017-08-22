@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <span *ngIf="!meal.id">Add a meal</span>
+      <span *ngIf="meal.id">Edit meal</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #mealForm="ngForm" (ngSubmit)="mealForm.valid && addMeal()">
+    <ion-item>
+      <ion-label floating>Time</ion-label>
+      <ion-datetime name="datetime"
+                    required="true"
+                    displayFormat="DD MMM YYYY HH:mm"
+                    [(ngModel)]="meal.datetime"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Quantity</ion-label>
+      <ion-input name="quantity"
+                 type="text"
+                 required="true"
+                 pattern="[0-9]*"
+                 clearInput="true"
+                 [(ngModel)]="meal.quantity"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <div class="errormsg" *ngIf="mealForm.submitted && mealForm.controls.quantity?.errors?.required">
+        <ion-icon name="alert"></ion-icon> Quantity is required.
+      </div>
+
+      <div class="errormsg" *ngIf="mealForm.submitted && mealForm.controls.quantity?.errors?.pattern">
+        <ion-icon name="alert"></ion-icon> Quantity should be a number expressed in ml.
+      </div>
+    </ion-item>
+    <ion-row>
+      <button ion-button color="primary" type="submit" block>
+        <span *ngIf="!meal.id">Add meal</span>
+        <span *ngIf="meal.id">Edit meal</span>
+      </button>
+    </ion-row>
+  </form>
+</ion-content>

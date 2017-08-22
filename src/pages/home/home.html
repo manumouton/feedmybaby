@@ -7,56 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-
-  <form #newMealForm="ngForm" (ngSubmit)="newMealForm.valid && addMeal()">
-    <ion-item>
-      <ion-label floating>Time</ion-label>
-      <ion-datetime name="datetime"
-                    required="true"
-                    displayFormat="DD MMM YYYY HH:mm"
-                    [(ngModel)]="newMeal.datetime"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Quantity</ion-label>
-      <ion-input name="quantity"
-                 type="text"
-                 required="true"
-                 pattern="[0-9]*"
-                 clearInput="true"
-                 [(ngModel)]="newMeal.quantity"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <div class="errormsg" *ngIf="newMealForm.submitted && newMealForm.controls.quantity?.errors?.required">
-        <ion-icon name="alert"></ion-icon> Quantity is required.
-      </div>
-
-      <div class="errormsg" *ngIf="newMealForm.submitted && newMealForm.controls.quantity?.errors?.pattern">
-        <ion-icon name="alert"></ion-icon> Quantity should be a number expressed in ml.
-      </div>
-    </ion-item>
-    <ion-row>
-      <button ion-button type="submit" block>Add!</button>
-    </ion-row>
-  </form>
-
-
   <ion-card>
     <ion-card-header>Today overview</ion-card-header>
     <ion-card-content>Jules has eaten <ion-badge>{{todayQuantity}} ml</ion-badge> today!</ion-card-content>
   </ion-card>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let item of meals | async">
+    <ion-item-sliding *ngFor="let meal of meals | async">
       <ion-item>
-        {{ item.quantity }} ml - {{item.datetime | date:'medium'}}
+        {{ meal.quantity }} ml - {{meal.datetime | date:'medium'}}
       </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="danger" icon-only>
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 </ion-content>

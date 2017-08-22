@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
 import {FirebaseProvider} from "../../providers/firebase/firebase";
-import {Meal} from "./meal.model";
+import {Meal} from "../meals/meal.model";
 import {FormBuilder} from "@angular/forms";
 
 @Component({
@@ -17,7 +17,7 @@ export class HomePage {
 
   private todayQuantity: number;
 
-  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, public formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider) {
     this.meals = this.firebaseProvider.getAllMealsForToday();
     this.newMeal = new Meal;
 

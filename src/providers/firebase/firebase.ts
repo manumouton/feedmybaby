@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
-import {Meal} from "../../pages/home/meal.model";
+import {Meal} from "../../pages/meals/meal.model";
 
 
 @Injectable()
@@ -31,11 +31,15 @@ export class FirebaseProvider {
   }
 
   addMeal(meal:Meal) {
-    this.afd.list('/meals/').push(meal)
+    return this.afd.list('/meals/').push(meal);
+  }
+
+  editMeal(meal: Meal){
+    return this.afd.list('/meals/').update(meal.id, meal);
   }
 
   deleteMeal(id) {
-    this.afd.list('/meals/').remove(id)
+    this.afd.list('/meals/').remove(id);
   }
 
 }
