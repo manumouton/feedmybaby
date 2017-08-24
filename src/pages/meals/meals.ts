@@ -14,12 +14,6 @@ export class MealsPage {
   private mealsList: FirebaseListObservable<Meal[]>;
 
   constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, public loadingCtrl: LoadingController, public params: NavParams) {
-    let loading = this.loadingCtrl.create({
-      content: "Load Data...",
-      duration: 3000,
-      dismissOnPageChange: true
-    });
-    loading.present();
     this.mealsList = this.firebaseProvider.getAllMeals();
   }
 

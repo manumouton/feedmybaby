@@ -10,11 +10,15 @@ import {FirebaseProvider} from "../../providers/firebase/firebase";
 export class AddMealPage {
 
   private meal: Meal = new Meal;
+  private id: any;
 
   constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, public params: NavParams) {
-    this.meal.id = this.params.get('key');
-    this.meal.datetime = this.params.get('datetime');
-    this.meal.quantity = this.params.get('quantity');
+    this.id = this.params.get('key');
+    if(this.id){
+      this.meal.datetime = this.params.get('datetime');
+      this.meal.quantity = this.params.get('quantity');
+    }
+
   }
 
   addMeal() {
@@ -28,7 +32,7 @@ export class AddMealPage {
 
   updateMeal() {
     this.firebaseProvider
-      .editMeal(this.meal)
+      .editMeal(this.id, this.meal)
       .then(
         updatedMeal => {this.navCtrl.pop(); },
         error => { console.log(error);}

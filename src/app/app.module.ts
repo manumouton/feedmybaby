@@ -15,6 +15,7 @@ import {AboutPage} from "../pages/about/about";
 import {MealsPage} from "../pages/meals/meals";
 import {AddMealPage} from "../pages/add-meal/add-meal";
 import {TabsPage} from "../pages/tabs/tabs";
+import {GraphsPage} from "../pages/graphs/graphs";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQevVrHS9wHKXpLKyPMdOkjALqqBE98M0",
@@ -31,7 +32,8 @@ const firebaseConfig = {
     HomePage,
     AboutPage,
     MealsPage,AddMealPage,
-    TabsPage
+    TabsPage,
+    GraphsPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ const firebaseConfig = {
     HomePage,
     AboutPage,
     MealsPage,AddMealPage,
-    TabsPage
+    TabsPage,
+    GraphsPage
   ],
   providers: [
     StatusBar,

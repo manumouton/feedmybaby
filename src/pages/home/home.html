@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar>
     <ion-title>
       Feed my Baby!
     </ion-title>
@@ -12,11 +12,16 @@
     <ion-card-content>Jules has eaten <ion-badge>{{todayQuantity}} ml</ion-badge> today!</ion-card-content>
   </ion-card>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let meal of meals | async">
-      <ion-item>
-        {{ meal.quantity }} ml - {{meal.datetime | date:'medium'}}
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-card>
+    <ion-card-header>Today's meals</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item-sliding *ngFor="let meal of meals | async">
+          <ion-item>
+            {{ meal.quantity }} ml - {{meal.datetime | date:'medium'}}
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -31,11 +31,13 @@ export class FirebaseProvider {
   }
 
   addMeal(meal:Meal) {
-    return this.afd.list('/meals/').push(meal);
+    return this.afd
+      .list('/meals/')
+      .push(meal);
   }
 
-  editMeal(meal: Meal){
-    return this.afd.list('/meals/').update(meal.id, meal);
+  editMeal(id: any, meal: Meal){
+    return this.afd.list('/meals/').update(id, meal);
   }
 
   deleteMeal(id) {

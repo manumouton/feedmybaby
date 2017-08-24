@@ -8,3 +8,6 @@ npm install angularfire2 --save
 npm install firebase --save
 ionic g provider firebase
 ```
+
+##Adding charts to your app
+
