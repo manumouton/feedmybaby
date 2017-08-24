@@ -18,7 +18,7 @@
       <ion-list>
         <ion-item-sliding *ngFor="let meal of meals | async">
           <ion-item>
-            {{ meal.quantity }} ml - {{meal.datetime | date:'medium'}}
+            {{meal.datetime | date:'medium'}} - {{ meal.quantity }} ml
           </ion-item>
         </ion-item-sliding>
       </ion-list>

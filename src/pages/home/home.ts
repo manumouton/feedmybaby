@@ -3,7 +3,6 @@ import {NavController} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
 import {FirebaseProvider} from "../../providers/firebase/firebase";
 import {Meal} from "../meals/meal.model";
-import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'page-home',
@@ -37,13 +36,7 @@ export class HomePage {
   }
 
   getQuantityDrunkToday(){
-    let sum = 0;
-    this.meals.$ref.on("value", function(snapshot){
-      snapshot.forEach(
-        mealsSnapshot => sum += mealsSnapshot.val().quantity
-      );
-    });
-    console.log(sum);
+    this.firebaseProvider.sumTodayMeals();
   }
 
 }

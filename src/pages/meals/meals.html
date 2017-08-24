@@ -16,7 +16,7 @@
     <ion-list-header>Jules' meals</ion-list-header>
       <ion-item-sliding *ngFor="let meal of mealsList | async">
         <ion-item>
-          {{ meal.quantity }} ml - {{meal.datetime | date:'medium'}}
+          {{meal.datetime | date:'medium'}} - {{ meal.quantity }} ml
         </ion-item>
       <ion-item-options>
         <button ion-button color="primary" icon-left (click)="editMeal(meal)">
