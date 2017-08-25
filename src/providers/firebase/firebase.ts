@@ -2,13 +2,17 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {Meal} from "../../pages/meals/meal.model";
+import * as firebase from "firebase/app";
+import Reference = firebase.database.Reference;
 
 
 @Injectable()
 export class FirebaseProvider {
 
-  constructor(public afd: AngularFireDatabase) {
+  public userProfileRef:Reference;
 
+  constructor(public afd: AngularFireDatabase) {
+    this.userProfileRef = afd.database.ref('/userProfile');
   }
 
   getAllMeals(): FirebaseListObservable<Meal[]> {
@@ -79,4 +83,14 @@ export class FirebaseProvider {
     this.afd.list('/meals/').remove(id);
   }
 
+  //User profile
+  createUserProfile(user, email:string){
+    this.userProfileRef.child(user.uid).set({
+      email: email
+    });
+  }
+
+  disconnectUser(userUid: string){
+    this.userProfileRef.child(userUid).off();
+  }
 }

@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
-import { ProfileProvider } from '../../providers/profile/profile';
-import { AuthProvider } from '../../providers/auth/auth';
+import {Component} from '@angular/core';
+import {AlertController, NavController} from 'ionic-angular';
+import {ProfileProvider} from '../../providers/profile/profile';
+import {AuthProvider} from '../../providers/auth/auth';
+import {LoginPage} from "../login/login";
 
-@IonicPage({
-  name: 'profile'
-})
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -26,7 +24,7 @@ export class ProfilePage {
 
   logOut(): void {
     this.authProvider.logoutUser().then(() => {
-      this.navCtrl.setRoot('login');
+      this.navCtrl.setRoot(LoginPage);
     });
   }
 

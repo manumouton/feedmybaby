@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import {AngularFireAuth} from "angularfire2/auth";
+import {FirebaseProvider} from "../firebase/firebase";
+import {User} from "firebase/app";
 
 @Injectable()
 export class ProfileProvider {
-  public userProfile:firebase.database.Reference;
-  public currentUser:firebase.User;
+  public currentUser:User;
 
-  constructor() {
-    firebase.auth().onAuthStateChanged( user => {
+  constructor(private angularFireAuth: AngularFireAuth,
+              private firebaseProvider: FirebaseProvider) {
+    this.angularFireAuth.auth.onAuthStateChanged( user => {
       if (user){
         this.currentUser = user;
         this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);

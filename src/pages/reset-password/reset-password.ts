@@ -1,13 +1,9 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, AlertController} from 'ionic-angular';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {AlertController, NavController} from 'ionic-angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthProvider} from '../../providers/auth/auth';
 import {EmailValidator} from '../../validators/email';
 
-
-@IonicPage({
-  name: 'reset-password'
-})
 @Component({
   selector: 'page-reset-password',
   templateUrl: 'reset-password.html',
@@ -44,7 +40,7 @@ export class ResetPasswordPage {
           alert.present();
 
         }, (error) => {
-          var errorMessage: string = error.message;
+          let errorMessage: string = error.message;
           let errorAlert = this.alertCtrl.create({
             message: errorMessage,
             buttons: [{text: "Ok", role: 'cancel'}]

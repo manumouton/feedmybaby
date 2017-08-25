@@ -1,20 +1,11 @@
 import {Component} from '@angular/core';
-import {
-  IonicPage,
-  NavController,
-  Loading,
-  LoadingController,
-  AlertController
-} from 'ionic-angular';
+import {AlertController, Loading, LoadingController, NavController} from 'ionic-angular';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthProvider} from '../../providers/auth/auth';
 import {EmailValidator} from '../../validators/email';
-import {HomePage} from '../home/home';
+import {TabsPage} from "../tabs/tabs";
 
-@IonicPage({
-  name: 'signup'
-})
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
@@ -40,7 +31,7 @@ export class SignupPage {
       this.authProvider.signupUser(this.signupForm.value.email, this.signupForm.value.password)
         .then(() => {
           this.loading.dismiss().then(() => {
-            this.navCtrl.setRoot(HomePage);
+            this.navCtrl.setRoot(TabsPage);
           });
         }, (error) => {
           this.loading.dismiss().then(() => {

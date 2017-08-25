@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
 import {FirebaseProvider} from "../../providers/firebase/firebase";
 import {Meal} from "../meals/meal.model";
+import {ProfilePage} from "../profile/profile";
 
 @Component({
   selector: 'page-home',
@@ -27,6 +28,6 @@ export class HomePage {
     return this.firebaseProvider.sumTodayMeals();
   }
 
-  goToProfile(){ this.navCtrl.push('profile'); }
+  goToProfile(){ this.navCtrl.push(ProfilePage); }
 
 }
