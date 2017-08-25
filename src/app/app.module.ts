@@ -16,6 +16,7 @@ import {MealsPage} from "../pages/meals/meals";
 import {AddMealPage} from "../pages/add-meal/add-meal";
 import {TabsPage} from "../pages/tabs/tabs";
 import {GraphsPage} from "../pages/graphs/graphs";
+import {DatePicker} from "@ionic-native/date-picker";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQevVrHS9wHKXpLKyPMdOkjALqqBE98M0",
@@ -29,10 +30,11 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    TabsPage,
     HomePage,
     AboutPage,
-    MealsPage,AddMealPage,
-    TabsPage,
+    MealsPage,
+    AddMealPage,
     GraphsPage
   ],
   imports: [
@@ -45,17 +47,19 @@ const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    TabsPage,
     HomePage,
     AboutPage,
-    MealsPage,AddMealPage,
-    TabsPage,
+    MealsPage,
+    AddMealPage,
     GraphsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseProvider
+    FirebaseProvider,
+    DatePicker
   ]
 })
 export class AppModule {

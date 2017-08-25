@@ -12,31 +12,21 @@ export class HomePage {
 
   private meals: FirebaseListObservable<Meal[]>;
 
-  private newMeal: Meal;
-
   private todayQuantity: number;
 
   constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider) {
     this.meals = this.firebaseProvider.getAllMealsForToday();
-    this.newMeal = new Meal;
-
-    this.getQuantityDrunkToday();
-  }
-
-  addMeal() {
-    this.firebaseProvider.addMeal(this.newMeal);
-  }
-
-  deleteMeal(id) {
-    this.firebaseProvider.deleteMeal(id);
+    this.todayQuantity = this.getQuantityDrunkToday();
   }
 
   logFrom(value: any){
     console.log(value);
   }
 
-  getQuantityDrunkToday(){
-    this.firebaseProvider.sumTodayMeals();
+  getQuantityDrunkToday(): number{
+    return this.firebaseProvider.sumTodayMeals();
   }
+
+  goToProfile(){ this.navCtrl.push('profile'); }
 
 }

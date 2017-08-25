@@ -35,7 +35,7 @@ export class FirebaseProvider {
       });
   }
 
-  sumTodayMeals() {
+  sumTodayMeals(): number {
     let sum = 0;
 
     let startOfTheDay = new Date();
@@ -60,8 +60,8 @@ export class FirebaseProvider {
           console.log(sum);
           return sum;
         }, err => console.log(err)
-
       )
+    return sum;
   }
 
 //CRUD
