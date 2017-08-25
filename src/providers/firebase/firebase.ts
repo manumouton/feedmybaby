@@ -16,12 +16,16 @@ export class FirebaseProvider {
   }
 
   getAllMealsForToday(): FirebaseListObservable<Meal[]> {
-    var startOfTheDay = new Date();
+    let startOfTheDay = new Date();
     startOfTheDay.setHours(0, 0, 0, 0);
-    var endOfTheDay = new Date();
+    let endOfTheDay = new Date();
     endOfTheDay.setHours(23, 59, 59, 999);
 
-    var listOfMealsForToday = this.afd.list('/meals/',
+    return this.listMeals(startOfTheDay, endOfTheDay);
+  }
+
+  listMeals(startOfTheDay: Date, endOfTheDay: Date) {
+    return this.afd.list('/meals/',
       {
         query: {
           orderByChild: 'datetime',
@@ -29,14 +33,35 @@ export class FirebaseProvider {
           endAt: endOfTheDay.toISOString()
         }
       });
-    return listOfMealsForToday;
   }
 
-  sumTodayMeals(){
+  sumTodayMeals() {
     let sum = 0;
 
-    console.log(sum);
-    sum;
+    let startOfTheDay = new Date();
+    startOfTheDay.setHours(0, 0, 0, 0);
+    let endOfTheDay = new Date();
+    endOfTheDay.setHours(23, 59, 59, 999);
+
+    let mealsRef = this.afd.database.ref("meals/");
+
+    mealsRef
+      .startAt(startOfTheDay.toISOString())
+      .endAt(endOfTheDay.toISOString())
+      .once("value",
+        a => {
+          console.log("In once: " + a.val());
+        }
+      )
+      .then(a => {
+          console.log("In then: " + a);
+          console.log(a);
+          console.log("In then val: " + a.val());
+          console.log(sum);
+          return sum;
+        }, err => console.log(err)
+
+      )
   }
 
 //CRUD
