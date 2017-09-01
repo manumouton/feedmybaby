@@ -2,8 +2,8 @@
 
   <ion-navbar>
     <ion-title>
-      <span *ngIf="!meal.id">Add a meal</span>
-      <span *ngIf="meal.id">Edit meal</span>
+      <span *ngIf="!id">Add a meal</span>
+      <span *ngIf="id">Edit meal</span>
     </ion-title>
   </ion-navbar>
 
@@ -41,8 +41,8 @@
     </ion-item>
     <ion-row>
       <button ion-button color="primary" type="submit" block>
-        <span *ngIf="!meal.id">Add meal</span>
-        <span *ngIf="meal.id">Edit meal</span>
+        <span *ngIf="!id">Add meal</span>
+        <span *ngIf="id">Edit meal</span>
       </button>
     </ion-row>
   </form>

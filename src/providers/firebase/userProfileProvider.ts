@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-import * as firebase from "firebase/app";
 import {Promise} from "firebase/app";
 import Reference = firebase.database.Reference;
 import {AngularFireDatabase} from "angularfire2/database";
