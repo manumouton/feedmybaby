@@ -1,22 +1,20 @@
-import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/map';
-import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
-import {Meal} from "../../pages/meals/meal.model";
+import {Injectable} from "@angular/core";
 import * as firebase from "firebase/app";
 import Reference = firebase.database.Reference;
-
+import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
+import {Meal} from "../../pages/meals/meal.model";
 
 @Injectable()
-export class FirebaseProvider {
-
-  public userProfileRef:Reference;
+export class MealsProvider {
+  //Meals
+  private mealsRef:Reference;
 
   constructor(public afd: AngularFireDatabase) {
-    this.userProfileRef = afd.database.ref('/userProfile');
+    this.mealsRef = afd.database.ref('/meals')
   }
 
   getAllMeals(): FirebaseListObservable<Meal[]> {
-    return this.afd.list('/meals/', {query: {orderByChild: 'datetime'}});
+    return this.afd.list(this.mealsRef, {query: {orderByChild: 'datetime'}});
   }
 
   getAllMealsForToday(): FirebaseListObservable<Meal[]> {
@@ -29,7 +27,7 @@ export class FirebaseProvider {
   }
 
   listMeals(startOfTheDay: Date, endOfTheDay: Date) {
-    return this.afd.list('/meals/',
+    return this.afd.list(this.mealsRef,
       {
         query: {
           orderByChild: 'datetime',
@@ -47,9 +45,7 @@ export class FirebaseProvider {
     let endOfTheDay = new Date();
     endOfTheDay.setHours(23, 59, 59, 999);
 
-    let mealsRef = this.afd.database.ref("meals/");
-
-    mealsRef
+    this.mealsRef
       .startAt(startOfTheDay.toISOString())
       .endAt(endOfTheDay.toISOString())
       .once("value",
@@ -64,33 +60,22 @@ export class FirebaseProvider {
           console.log(sum);
           return sum;
         }, err => console.log(err)
-      )
+      );
     return sum;
   }
 
-//CRUD
+  //CRUD
   addMeal(meal: Meal) {
     return this.afd
-      .list('/meals/')
+      .list(this.mealsRef)
       .push(meal);
   }
 
   editMeal(id: any, meal: Meal) {
-    return this.afd.list('/meals/').update(id, meal);
+    return this.afd.list(this.mealsRef).update(id, meal);
   }
 
   deleteMeal(id) {
-    this.afd.list('/meals/').remove(id);
-  }
-
-  //User profile
-  createUserProfile(user, email:string){
-    this.userProfileRef.child(user.uid).set({
-      email: email
-    });
-  }
-
-  disconnectUser(userUid: string){
-    this.userProfileRef.child(userUid).off();
+    this.afd.list(this.mealsRef).remove(id);
   }
 }

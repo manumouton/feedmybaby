@@ -12,8 +12,6 @@ import {AngularFireModule} from 'angularfire2';
 import {TabsPage} from "../pages/tabs/tabs";
 
 import {AuthProvider} from '../providers/auth/auth';
-import {ProfileProvider} from '../providers/profile/profile';
-import {FirebaseProvider} from '../providers/firebase/firebase';
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {HomePage} from "../pages/home/home";
 import {AboutPage} from "../pages/about/about";
@@ -24,6 +22,8 @@ import {LoginPage} from "../pages/login/login";
 import {ResetPasswordPage} from "../pages/reset-password/reset-password";
 import {SignupPage} from "../pages/signup/signup";
 import {ProfilePage} from "../pages/profile/profile";
+import {MealsProvider} from "../providers/firebase/mealsProvider";
+import {UserProfileProvider} from "../providers/firebase/userProfileProvider";
 
 @NgModule({
   declarations: [
@@ -65,9 +65,9 @@ import {ProfilePage} from "../pages/profile/profile";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseProvider,
-    AuthProvider,
-    ProfileProvider
+    MealsProvider,
+    UserProfileProvider,
+    AuthProvider
   ]
 })
 export class AppModule {

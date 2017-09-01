@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
-import {FirebaseProvider} from "../../providers/firebase/firebase";
 import {Meal} from "../meals/meal.model";
 import {ProfilePage} from "../profile/profile";
+import {MealsProvider} from "../../providers/firebase/mealsProvider";
 
 @Component({
   selector: 'page-home',
@@ -15,8 +15,8 @@ export class HomePage {
 
   private todayQuantity: number;
 
-  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider) {
-    this.meals = this.firebaseProvider.getAllMealsForToday();
+  constructor(public navCtrl: NavController, public mealsProvider: MealsProvider) {
+    this.meals = this.mealsProvider.getAllMealsForToday();
     this.todayQuantity = this.getQuantityDrunkToday();
   }
 
@@ -25,7 +25,7 @@ export class HomePage {
   }
 
   getQuantityDrunkToday(): number{
-    return this.firebaseProvider.sumTodayMeals();
+    return this.mealsProvider.sumTodayMeals();
   }
 
   goToProfile(){ this.navCtrl.push(ProfilePage); }

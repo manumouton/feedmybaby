@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {AlertController, NavController} from 'ionic-angular';
-import {ProfileProvider} from '../../providers/profile/profile';
 import {AuthProvider} from '../../providers/auth/auth';
 import {LoginPage} from "../login/login";
+import {UserProfileProvider} from "../../providers/firebase/userProfileProvider";
 
 @Component({
   selector: 'page-profile',
@@ -13,10 +13,10 @@ export class ProfilePage {
   public birthDate:string;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
-              public profileProvider: ProfileProvider, public authProvider: AuthProvider) {}
+              public userProfileProvider: UserProfileProvider, public authProvider: AuthProvider) {}
 
   ionViewDidEnter() {
-    this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+    this.userProfileProvider.getUserProfile().on('value', userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
       this.birthDate = userProfileSnapshot.val().birthDate;
     });
@@ -50,7 +50,7 @@ export class ProfilePage {
         {
           text: 'Save',
           handler: data => {
-            this.profileProvider.updateName(data.firstName, data.lastName);
+            this.userProfileProvider.updateName(data.firstName, data.lastName);
           }
         }
       ]
@@ -59,7 +59,7 @@ export class ProfilePage {
   }
 
   updateDOB(birthDate){
-    this.profileProvider.updateDOB(birthDate);
+    this.userProfileProvider.updateDOB(birthDate);
   }
 
   updateEmail(){
@@ -84,7 +84,7 @@ export class ProfilePage {
           handler: data => {
             let newEmail = data.newEmail;
 
-            this.profileProvider.updateEmail(data.newEmail, data.password).then( () =>{
+            this.userProfileProvider.updateEmail(data.newEmail, data.password).then( () =>{
               this.userProfile.email = newEmail;
             }).catch(error => {
               console.log('ERROR: '+error.message);
@@ -117,7 +117,7 @@ export class ProfilePage {
         {
           text: 'Save',
           handler: data => {
-            this.profileProvider.updatePassword(data.newPassword, data.oldPassword);
+            this.userProfileProvider.updatePassword(data.newPassword, data.oldPassword);
           }
         }
       ]

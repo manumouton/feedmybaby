@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2/database';
 import {NavController, NavParams, LoadingController} from 'ionic-angular';
 import {AddMealPage} from '../add-meal/add-meal';
-import {FirebaseProvider} from "../../providers/firebase/firebase";
 import {Meal} from "./meal.model";
+import {MealsProvider} from "../../providers/firebase/mealsProvider";
 
 @Component({
   selector: 'page-meals',
@@ -13,8 +13,8 @@ export class MealsPage {
 
   private mealsList: FirebaseListObservable<Meal[]>;
 
-  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, public loadingCtrl: LoadingController, public params: NavParams) {
-    this.mealsList = this.firebaseProvider.getAllMeals();
+  constructor(public navCtrl: NavController, public mealsProvider: MealsProvider, public loadingCtrl: LoadingController, public params: NavParams) {
+    this.mealsList = this.mealsProvider.getAllMeals();
   }
 
   addMeal() {

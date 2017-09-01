@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Meal} from "../meals/meal.model";
-import {FirebaseProvider} from "../../providers/firebase/firebase";
-import {DatePicker} from "@ionic-native/date-picker";
+import {MealsProvider} from "../../providers/firebase/mealsProvider";
 
 @Component({
   selector: 'page-add-meal',
@@ -15,27 +14,17 @@ export class AddMealPage {
 
   constructor(public navCtrl: NavController,
               // private datePicker:DatePicker,
-              public firebaseProvider: FirebaseProvider,
+              public mealsProvider: MealsProvider,
               public params: NavParams) {
     this.id = this.params.get('key');
     if(this.id){
       this.meal.datetime = this.params.get('datetime');
       this.meal.quantity = this.params.get('quantity');
     }
-
-    // this.datePicker.show(
-    //   {date: new Date(),
-    //     mode: 'date',
-    //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK,
-    //     is24Hour: true
-    //   }).then(
-    //   date => console.log('Got date: ', date),
-    //   err => console.log('Error occurred while getting date: ', err)
-    // );
   }
 
   addMeal() {
-    this.firebaseProvider
+    this.mealsProvider
       .addMeal(this.meal)
       .then(
         createdMeal => {this.navCtrl.pop(); },
@@ -44,7 +33,7 @@ export class AddMealPage {
   }
 
   updateMeal() {
-    this.firebaseProvider
+    this.mealsProvider
       .editMeal(this.id, this.meal)
       .then(
         updatedMeal => {this.navCtrl.pop(); },

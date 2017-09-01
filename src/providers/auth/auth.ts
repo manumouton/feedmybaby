@@ -4,8 +4,8 @@ import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 
 import {AngularFireAuth} from 'angularfire2/auth';
-import {FirebaseProvider} from "../firebase/firebase";
 import {User} from "firebase/app";
+import {UserProfileProvider} from "../firebase/userProfileProvider";
 
 @Injectable()
 export class AuthProvider {
@@ -13,7 +13,7 @@ export class AuthProvider {
 
   constructor(public http: Http,
               private angularFireAuth: AngularFireAuth,
-              private firebaseProvider: FirebaseProvider) {
+              private userProfileProvider: UserProfileProvider) {
     this.user = this.angularFireAuth.authState;
   }
 
@@ -33,7 +33,7 @@ export class AuthProvider {
         .auth
         .createUserWithEmailAndPassword(email, password)
         .then((val: any) => resolve())
-        .then(user => this.firebaseProvider.createUserProfile(user, email))
+        .then(user => this.userProfileProvider.createUserProfile(user, email))
         .catch((err: any) => reject(err))
     });
   }
@@ -49,7 +49,8 @@ export class AuthProvider {
   }
 
   logoutUser(): Promise<any> {
-    // this.firebaseProvider.disconnectUser(this.user.);
+    //TODO disconnect
+    // this.userProfileProvider.disconnectUser(this.user.uid);
 
     return new Promise((resolve, reject) => {
       this.angularFireAuth
