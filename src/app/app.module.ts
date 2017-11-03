@@ -26,6 +26,7 @@ import {SignupPage} from "../pages/signup/signup";
 import {ProfilePage} from "../pages/profile/profile";
 import {MealsProvider} from "../providers/firebase/mealsProvider";
 import {UserProfileProvider} from "../providers/firebase/userProfileProvider";
+import {FIREBASE_CREDENTIALS} from "./firebase.credentials";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import {UserProfileProvider} from "../providers/firebase/userProfileProvider";
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence()

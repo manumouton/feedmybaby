@@ -6,25 +6,14 @@ import {TabsPage} from "../pages/tabs/tabs";
 import firebase from 'firebase';
 import {LoginPage} from "../pages/login/login";
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyDQevVrHS9wHKXpLKyPMdOkjALqqBE98M0",
-  authDomain: "feedmybaby-a8f1e.firebaseapp.com",
-  databaseURL: "https://feedmybaby-a8f1e.firebaseio.com",
-  projectId: "feedmybaby-a8f1e",
-  storageBucket: "feedmybaby-a8f1e.appspot.com",
-  messagingSenderId: "184919232240"
-};
-
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  rootPage:any;
+  rootPage:any = 'LoginPage';
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-
-    firebase.initializeApp(firebaseConfig);
 
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
