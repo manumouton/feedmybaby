@@ -9,10 +9,12 @@ import {firebaseConfig, MyApp} from './app.component';
 import {HttpModule} from '@angular/http';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {AngularFirestoreModule} from 'angularfire2/firestore’;
 import {TabsPage} from "../pages/tabs/tabs";
 
 import {AuthProvider} from '../providers/auth/auth';
-import {AngularFireAuthModule} from "angularfire2/auth";
+
 import {HomePage} from "../pages/home/home";
 import {AboutPage} from "../pages/about/about";
 import {MealsPage} from "../pages/meals/meals";
@@ -45,7 +47,8 @@ import {UserProfileProvider} from "../providers/firebase/userProfileProvider";
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
